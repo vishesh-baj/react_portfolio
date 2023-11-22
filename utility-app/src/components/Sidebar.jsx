@@ -10,7 +10,7 @@ const Sidebar = () => {
       ></label>
       <ul className="menu p-4 w-60 min-h-full bg-base-200 text-base-content">
         {/* Sidebar content here */}
-        <h1 className="text-xl text-teal-400 text-bold">LOGO</h1>
+        <h1 className="text-xl text-teal-400">LOGO</h1>
 
         <ul className="menu bg-base-200 w-56 rounded-box">
           <li>

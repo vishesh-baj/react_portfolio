@@ -1,5 +1,4 @@
 import Navbar from "../components/Navbar";
-import { RxHamburgerMenu } from "react-icons/rx";
 import Sidebar from "../components/Sidebar";
 
 const AppLayout = ({ children }) => {
@@ -8,7 +7,7 @@ const AppLayout = ({ children }) => {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content ">
         <Navbar />
-        
+
         {/* Page content here */}
         {children}
       </div>
