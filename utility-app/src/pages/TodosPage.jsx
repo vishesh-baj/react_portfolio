@@ -10,12 +10,19 @@ const TodosPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ resolver: yupResolver(todoSchema) });
 
   const [todos, setTodos] = useState([]);
+  const [todoToBeEdited, setTodoToBeEdited] = useState("");
+  const [editedTodo, seteditedTodo] = useState("");
 
   const onSubmit = (data) => {
-    setTodos((prevState) => [...prevState, data.todoItem]);
+    setTodos((prevState) => [
+      ...prevState,
+      { id: nanoid(), todoItem: data.todoItem },
+    ]);
+    reset();
   };
 
   const handleDelete = (todoItem) => {
@@ -24,8 +31,19 @@ const TodosPage = () => {
     setTodos(filteredTodos);
   };
 
-  const handleEdit = (todoItem) => {
-    console.log("TODO TO BE EDITED: ", todoItem);
+  const handleEdit = (todo) => {
+    setTodoToBeEdited(todo);
+    seteditedTodo(todo.todoItem);
+    document.getElementById("todo_edit_modal").showModal();
+  };
+
+  const handleSaveTodo = () => {
+    const updatedTodos = todos.map((todo) =>
+      todo === todoToBeEdited ? { ...todo, todoItem: editedTodo } : todo
+    );
+    setTodos(updatedTodos);
+    setTodoToBeEdited("");
+    document.getElementById("todo_edit_modal").close();
   };
 
   return (
@@ -43,7 +61,7 @@ const TodosPage = () => {
               name="todoItem"
               id="todo_input"
             />
-            <button className="btn btn-ghost">Add</button>
+            <button className="btn btn-ghost">ADD</button>
           </div>
           <p className="text-rose-400 mt-4">{errors.todoItem?.message}</p>
         </form>
@@ -66,7 +84,46 @@ const TodosPage = () => {
         )}
       </div>
 
-      
+      {/* edit modal */}
+
+      <dialog
+        id="todo_edit_modal"
+        className="modal modal-bottom sm:modal-middle"
+      >
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Edit Todo</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
+          <div className="form-control">
+            <label className="label" htmlFor="editedTodo">
+              <span className="label-text">Edit Todo</span>
+            </label>
+            <input
+              className="input input-borered"
+              value={editedTodo}
+              onChange={(e) => seteditedTodo(e.target.value)}
+              type="text"
+              id="editedTodo"
+            />
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              <button onClick={handleSaveTodo} className="btn btn-primary">
+                Save
+              </button>
+              <button
+                onClick={() =>
+                  document.getElementById("todo_edit_modal").close()
+                }
+                className="btn"
+              >
+                Close
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

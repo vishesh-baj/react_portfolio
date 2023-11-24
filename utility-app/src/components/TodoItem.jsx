@@ -1,12 +1,17 @@
-import { nanoid } from "nanoid";
-
-const TodoItem = ({ handleDelete, handleEdit, todo }) => {
+const TodoItem = ({
+  handleDelete,
+  handleEdit,
+  todo,
+  editedTodo,
+  seteditedTodo,
+}) => {
   return (
     <div>
-      <li key={nanoid()} className="collapse bg-base-200">
+      {" "}
+      <li key={todo.id} className="collapse bg-base-200">
         <input type="checkbox" className="peer" />
         <div className="collapse-title bg-primary text-primary-content peer-checked:bg-base-300 peer-checked:text-base-content">
-          {todo}
+          {todo.todoItem}
         </div>
         <div className="collapse-content bg-primary text-primary-content peer-checked:bg-base-300 peer-checked:text-secondary-content">
           <div className="flex gap-4">
@@ -17,7 +22,10 @@ const TodoItem = ({ handleDelete, handleEdit, todo }) => {
               delete
             </button>
             <button
-              onClick={() => handleEdit(todo)}
+              onClick={() => {
+                handleEdit(todo);
+                document.getElementById("todo_edit_modal").showModal();
+              }}
               className="btn btn-primary btn-outline"
             >
               edit
