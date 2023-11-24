@@ -108,7 +108,7 @@ const TodosPage = () => {
             />
           </div>
           <div className="modal-action">
-            <form method="dialog">
+            <form className="flex gap-4" method="dialog">
               <button onClick={handleSaveTodo} className="btn btn-primary">
                 Save
               </button>
