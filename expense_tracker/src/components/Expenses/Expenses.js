@@ -6,9 +6,16 @@ import ExpensesFilter from "./ExpenseFilter";
 
 const Expenses = ({ items }) => {
   const [filteredYear, setFilteredYear] = useState("2020");
+  const [expensesArr, setExpensesArr] = useState(items);
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
+    console.log("FILTERED YER: ", selectedYear);
+    const filteredExpenses = items.filter(
+      (item) => item.date.getFullYear() === Number(selectedYear)
+    );
+    setExpensesArr(filteredExpenses);
+    console.log("FILTERED EXPENSES: ", filteredExpenses);
   };
   return (
     <Card className="expenses">
@@ -16,7 +23,7 @@ const Expenses = ({ items }) => {
         selected={filteredYear}
         onChangeFilter={filterChangeHandler}
       />
-      {items.map((item) => {
+      {expensesArr.map((item) => {
         return <ExpenseItem key={item.id} expense={item} />;
       })}
     </Card>

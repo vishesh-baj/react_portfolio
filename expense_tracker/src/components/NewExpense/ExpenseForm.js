@@ -14,6 +14,7 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
       amount: userInput.enteredAmount,
       date: new Date(userInput.enteredDate),
     };
+    console.log("EXPENSE DATA: ", expenseData);
     onSaveExpenseData(expenseData);
     setUserInput({ enteredTitle: "", enteredAmount: "", enteredDate: "" });
   };
