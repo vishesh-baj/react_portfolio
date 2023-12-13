@@ -10,6 +10,7 @@ import {
 import { db } from "../firebase";
 import { doc, serverTimestamp, setDoc } from "@firebase/firestore";
 import { toast } from "react-toastify";
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -52,7 +53,7 @@ const SignUp = () => {
       toast.error("Something went wrong with the registration");
     }
   };
-
+  // jsx
   return (
     <section>
       <h1 className="text-center text-3xl mt-6 font-bold">Sign Up</h1>
