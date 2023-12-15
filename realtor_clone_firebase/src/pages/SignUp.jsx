@@ -29,6 +29,7 @@ const SignUp = () => {
     }));
   };
 
+  // submit handler 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -53,7 +54,7 @@ const SignUp = () => {
       toast.error("Something went wrong with the registration");
     }
   };
-  // jsx
+
   return (
     <section>
       <h1 className="text-center text-3xl mt-6 font-bold">Sign Up</h1>
